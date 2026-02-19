@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home')
+    ->middleware('guest');
 
 // route login
 Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])
@@ -31,6 +31,10 @@ Route::group(['middleware' => ['auth']], function () {
     // route settings update
     Route::put('/settings', [App\Http\Controllers\SettingController::class, 'update'])
         ->name('settings.update');
+
+    // route settings delete logo
+    Route::delete('/settings/delete-logo', [App\Http\Controllers\SettingController::class, 'deleteLogo'])
+        ->name('settings.delete-logo');
 
     // route resource untuk permission
     Route::resource('/permissions', App\Http\Controllers\PermissionController::class);
