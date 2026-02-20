@@ -7,20 +7,12 @@ import {
     SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { usePage } from "@inertiajs/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Swal from "sweetalert2";
 
 export default function LayoutApp({ children }) {
     // destruct auth dan flash dari props
     const { auth, flash } = usePage().props;
-
-    // state untuk pathname
-    const [currentPath, setCurrentPath] = useState("");
-
-    // useEffect untuk mendapatkan current path saat komponen mount dan update
-    useEffect(() => {
-        setCurrentPath(window.location.pathname);
-    }, []);
 
     // useEffect untuk menampilkan Sweet Alert jika ada flash message
     useEffect(() => {

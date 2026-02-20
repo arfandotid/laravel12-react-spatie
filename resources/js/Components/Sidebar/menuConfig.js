@@ -2,10 +2,22 @@
 import hasAnyPermission from "@/Utils/Permission";
 
 // import icons
-import { Users, UserCog, Settings, Key, Shield } from "lucide-react";
+import {
+    Users,
+    UserCog,
+    Settings,
+    Key,
+    Shield,
+    LayoutDashboard,
+} from "lucide-react";
 
 // Menu items dengan permission check
 export const menuItems = [
+    {
+        name: "Dashboard",
+        icon: LayoutDashboard,
+        href: "/dashboard",
+    },
     {
         name: "User Management",
         icon: UserCog,
