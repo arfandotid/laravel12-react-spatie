@@ -13,13 +13,14 @@ export default function Dashboard() {
             <Head title={`Dashboard`} />
             <LayoutApp>
                 {/* Header */}
-                <div className="mb-8">
+                {/* <div className="mb-8">
                     <PageHeader
                         showButton={false}
                         title="Dashboard"
                         description="Halaman dashboard"
                     />
-                </div>
+                </div> */}
+                tes
             </LayoutApp>
         </>
     );

@@ -57,14 +57,6 @@ export default function SettingsIndex() {
         <>
             <Head title={`Pengaturan Desa`} />
             <LayoutApp>
-                {/* Header */}
-                <div className="mb-8">
-                    <PageHeader
-                        title="Pengaturan Aplikasi"
-                        description="Kelola identitas aplikasi, logo, dan pengaturan umum"
-                    />
-                </div>
-
                 {/* Card */}
                 <div className="p-6 bg-white rounded-xl shadow-sm">
                     <form onSubmit={handleSubmit}>

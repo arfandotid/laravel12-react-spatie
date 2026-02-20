@@ -15,21 +15,18 @@ export const menuItems = [
                 name: "Roles",
                 href: "/roles",
                 icon: Shield,
-                description: "Kelola peran pengguna",
                 permissions: ["roles.index"],
             },
             {
                 name: "Permissions",
                 href: "/permissions",
                 icon: Key,
-                description: "Kelola izin akses",
                 permissions: ["permissions.index"],
             },
             {
                 name: "Users",
                 href: "/users",
                 icon: Users,
-                description: "Kelola data pengguna",
                 permissions: ["users.index"],
             },
         ],
@@ -39,7 +36,6 @@ export const menuItems = [
         icon: Settings,
         href: "/settings",
         permissions: ["settings.index"],
-        description: "Pengaturan sistem aplikasi",
     },
 ];
 

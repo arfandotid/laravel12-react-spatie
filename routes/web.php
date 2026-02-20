@@ -8,7 +8,7 @@ Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
 
 // route login
 Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])
-    ->name('login.index')
+    ->name('login')
     ->middleware('guest');
 
 // route login store
