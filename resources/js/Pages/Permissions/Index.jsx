@@ -22,8 +22,8 @@ import Search from "@/Shared/Search";
 // import component Delete
 import Delete from "@/Shared/Delete";
 
-// import component Pagination
-import Pagination from "@/Shared/Pagination";
+// Import table pagination
+import TablePagination from "@/Shared/TablePagination";
 
 export default function PermissionsIndex() {
     // destruct props "permissions" dari usePage
@@ -124,9 +124,7 @@ export default function PermissionsIndex() {
                     </div>
 
                     {/* Pagination */}
-                    <div className="my-3">
-                        <Pagination links={permissions.links} />
-                    </div>
+                    <TablePagination links={permissions.links} />
                 </div>
             </LayoutApp>
         </>

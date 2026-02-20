@@ -6,6 +6,8 @@ import { router } from "@inertiajs/react";
 
 //import icons
 import { Search } from "lucide-react";
+import { Input } from "@/Components/ui/input";
+import { Button } from "@/Components/ui/button";
 
 export default function SearchComponent({ URL }) {
     //define state search
@@ -29,7 +31,7 @@ export default function SearchComponent({ URL }) {
                             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                 <Search className="w-5 h-5 text-gray-400" />
                             </div>
-                            <input
+                            <Input
                                 type="search"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
@@ -41,13 +43,10 @@ export default function SearchComponent({ URL }) {
 
                     {/* Action buttons */}
                     <div className="flex space-x-3 mt-3 md:mt-0">
-                        <button
-                            type="submit"
-                            className="px-4 py-2.5 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors duration-200"
-                        >
+                        <Button type="submit">
                             <Search className="w-4 h-4 inline mr-2" />
                             Search
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </form>

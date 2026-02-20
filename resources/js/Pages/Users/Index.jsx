@@ -19,11 +19,11 @@ import TableEmpty from "@/Shared/TableEmpty";
 // import component Search
 import Search from "@/Shared/Search";
 
-// import component Pagination
-import Pagination from "@/Shared/Pagination";
-
 // import component Delete
 import Delete from "@/Shared/Delete";
+
+// import table pagination
+import TablePagination from "@/Shared/TablePagination";
 
 export default function UsersIndex() {
     // destruct props "users"
@@ -136,9 +136,7 @@ export default function UsersIndex() {
                     </div>
 
                     {/* Pagination */}
-                    <div className="my-3">
-                        <Pagination links={users.links} />
-                    </div>
+                    <TablePagination links={users.links} />
                 </div>
             </LayoutApp>
         </>

@@ -23,7 +23,7 @@ import Search from "@/Shared/Search";
 import Delete from "@/Shared/Delete";
 
 // import component Pagination
-import Pagination from "@/Shared/Pagination";
+import TablePagination from "@/Shared/TablePagination";
 
 export default function RolesIndex() {
     // destruct props "roles"
@@ -34,36 +34,33 @@ export default function RolesIndex() {
             <Head title={`Roles`} />
             <LayoutApp>
                 {/* Header */}
-                <div className="mb-8">
-                    <PageHeader
-                        showButton
-                        title="Roles"
-                        description="Kelola role dan hak akses pengguna"
-                        action="/roles/create"
-                        actionText="Tambah Role"
-                        permission="roles.create"
-                    />
-                </div>
+                <PageHeader
+                    showButton
+                    title="Roles"
+                    description="Kelola role dan hak akses pengguna"
+                    action="/roles/create"
+                    actionText="Tambah Role"
+                    permission="roles.create"
+                />
 
-                {/* Card */}
-                <div className="p-6 bg-white rounded-xl shadow-sm">
+                <div className="space-y-5">
                     <Search URL={"/roles"} />
 
                     {/* Table */}
-                    <div className="overflow-x-auto border border-gray-200 rounded-lg mt-5">
+                    <div className="overflow-x-auto border border-gray-200 rounded-lg">
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
                                         No.
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
                                         Nama Role
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
                                         Jumlah Permission
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase w-7">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase w-7">
                                         Aksi
                                     </th>
                                 </tr>
@@ -75,18 +72,18 @@ export default function RolesIndex() {
                                             key={role.id}
                                             className="hover:bg-gray-50"
                                         >
-                                            <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                                            <td className="px-6 py-2 text-sm font-medium text-gray-900">
                                                 {++index +
                                                     (roles.current_page - 1) *
                                                         roles.per_page}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-gray-900">
+                                            <td className="px-6 py-2 text-sm text-gray-900">
                                                 {role.name}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                            <td className="px-6 py-2 text-sm text-gray-700">
                                                 {role.permissions_count}
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 <div className="flex items-center space-x-2">
                                                     {hasAnyPermission([
                                                         "roles.edit",
@@ -123,9 +120,7 @@ export default function RolesIndex() {
                     </div>
 
                     {/* Pagination */}
-                    <div className="my-3">
-                        <Pagination links={roles.links} />
-                    </div>
+                    <TablePagination links={roles.links} />
                 </div>
             </LayoutApp>
         </>
