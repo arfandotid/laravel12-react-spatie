@@ -19,6 +19,7 @@ import {
 import { Field, FieldGroup, FieldLabel, FieldSet } from "@/Components/ui/field";
 import { Input } from "@/Components/ui/input";
 import { Button } from "@/Components/ui/button";
+import PageHeader from "@/Shared/PageHeader";
 
 export default function SettingsIndex() {
     // destructure "setting" dari props page
@@ -64,12 +65,15 @@ export default function SettingsIndex() {
         <>
             <Head title={`Pengaturan Aplikasi`} />
             <LayoutApp>
+                <PageHeader
+                    title="Pengaturan"
+                    description="Kelola pengaturan aplikasi"
+                />
+
                 <form onSubmit={handleSubmit}>
                     <FieldSet>
                         <Field>
-                            <FieldLabel className="block text-sm font-medium text-gray-700 mb-2">
-                                Logo Aplikasi
-                            </FieldLabel>
+                            <FieldLabel>Logo Aplikasi</FieldLabel>
                             <div
                                 className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors
                                     ${errors.app_logo ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-blue-500"}`}

@@ -17,10 +17,12 @@ export default function PageHeader({
     permission,
 }) {
     return (
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-row items-center justify-between">
             <div>
-                <h1 className="text-xl font-bold text-gray-900">{title}</h1>
-                <p className="text-sm text-gray-600">{description}</p>
+                <h1 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+                    {title}
+                </h1>
+                <p className="text-sm text-muted-foreground">{description}</p>
             </div>
 
             {showButton && permission && (
