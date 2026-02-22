@@ -97,7 +97,7 @@ export default function RolesIndex() {
                                                                 size="icon"
                                                                 variant="outline"
                                                             >
-                                                                <Edit className="w-4 h-4" />
+                                                                <Edit />
                                                             </Button>
                                                         </Link>
                                                     )}

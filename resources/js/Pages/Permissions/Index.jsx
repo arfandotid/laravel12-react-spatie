@@ -24,6 +24,7 @@ import Delete from "@/Shared/Delete";
 
 // Import table pagination
 import TablePagination from "@/Shared/TablePagination";
+import { Button } from "@/Components/ui/button";
 
 export default function PermissionsIndex() {
     // destruct props "permissions" dari usePage
@@ -34,19 +35,17 @@ export default function PermissionsIndex() {
             <Head title={`Permissions`} />
             <LayoutApp>
                 {/* Header */}
-                <div className="mb-8">
-                    <PageHeader
-                        showButton
-                        title="Permissions"
-                        description="Kelola permission untuk hak akses pengguna"
-                        action="/permissions/create"
-                        actionText="Tambah Permission"
-                        permission="permissions.create"
-                    />
-                </div>
+                <PageHeader
+                    showButton
+                    title="Permissions"
+                    description="Kelola permission untuk hak akses pengguna"
+                    action="/permissions/create"
+                    actionText="Tambah Permission"
+                    permission="permissions.create"
+                />
 
                 {/* Card */}
-                <div className="p-6 bg-white rounded-xl shadow-sm">
+                <div className="space-y-5">
                     <Search URL={"/permissions"} />
 
                     {/* Table */}
@@ -54,13 +53,13 @@ export default function PermissionsIndex() {
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
                                         No.
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
                                         Nama Permission
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase w-7">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase w-7">
                                         Aksi
                                     </th>
                                 </tr>
@@ -73,26 +72,30 @@ export default function PermissionsIndex() {
                                                 key={permission.id}
                                                 className="hover:bg-gray-50"
                                             >
-                                                <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                                                <td className="px-6 py-2 text-sm font-medium text-gray-900">
                                                     {++index +
                                                         (permissions.current_page -
                                                             1) *
                                                             permissions.per_page}
                                                 </td>
-                                                <td className="px-6 py-4 text-sm text-gray-900">
+                                                <td className="px-6 py-2 text-sm text-gray-900">
                                                     {permission.name}
                                                 </td>
-                                                <td className="px-6 py-4">
+                                                <td className="px-6 py-2">
                                                     <div className="flex items-center space-x-2">
                                                         {hasAnyPermission([
                                                             "permissions.edit",
                                                         ]) && (
                                                             <Link
                                                                 href={`/permissions/${permission.id}/edit`}
-                                                                className="inline-flex items-center p-2 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg"
                                                                 title="Edit"
                                                             >
-                                                                <Edit className="w-4 h-4" />
+                                                                <Button
+                                                                    size="icon"
+                                                                    variant="outline"
+                                                                >
+                                                                    <Edit />
+                                                                </Button>
                                                             </Link>
                                                         )}
                                                         {hasAnyPermission([

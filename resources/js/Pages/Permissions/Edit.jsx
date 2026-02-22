@@ -9,6 +9,9 @@ import { Save } from "lucide-react";
 
 // import component PageHeader
 import PageHeader from "@/Shared/PageHeader";
+import { Button } from "@/Components/ui/button";
+import { Field, FieldDescription, FieldLabel } from "@/Components/ui/field";
+import { Input } from "@/Components/ui/input";
 
 export default function PermissionsEdit() {
     // destruct permission dari props
@@ -34,60 +37,45 @@ export default function PermissionsEdit() {
             />
             <LayoutApp>
                 {/* Header */}
-                <div className="mb-8">
-                    <PageHeader
-                        title="Edit Permission"
-                        description="Perbarui data permission untuk hak akses pengguna"
-                    />
-                </div>
+                <PageHeader
+                    title="Edit Permission"
+                    description="Perbarui data permission untuk hak akses pengguna"
+                />
 
                 {/* Card */}
-                <div className="p-6 bg-white rounded-xl shadow-sm">
-                    <form onSubmit={handleSubmit}>
-                        <div className="space-y-6">
-                            {/* Name */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Nama Permission
-                                </label>
-                                <input
-                                    type="text"
-                                    value={data.name}
-                                    onChange={(e) =>
-                                        setData("name", e.target.value)
-                                    }
-                                    className={`w-full px-4 py-2 border rounded-lg ${errors.name ? "border-red-500" : "border-gray-300"}`}
-                                    placeholder="Contoh: permissions.edit"
-                                />
-                                {errors.name && (
-                                    <p className="mt-1 text-sm text-red-600">
-                                        {errors.name}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="space-y-5">
+                        {/* Name */}
+                        <Field>
+                            <FieldLabel>Nama Permission</FieldLabel>
+                            <Input
+                                type="text"
+                                value={data.name}
+                                onChange={(e) =>
+                                    setData("name", e.target.value)
+                                }
+                                className={`${errors.name ? "border-red-500" : "border-gray-300"}`}
+                                placeholder="Contoh: permissions.edit"
+                            />
+                            {errors.name && (
+                                <FieldDescription className="mt-1 text-sm text-red-600">
+                                    {errors.name}
+                                </FieldDescription>
+                            )}
+                        </Field>
+                    </div>
 
-                        {/* Tombol Aksi */}
-                        <div className="flex justify-start space-x-3 pt-6">
-                            <Link
-                                href="/permissions"
-                                className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
-                            >
-                                Batal
-                            </Link>
-                            <button
-                                type="submit"
-                                disabled={processing}
-                                className="inline-flex items-center px-6 py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50"
-                            >
-                                <Save className="w-4 h-4 mr-2" />
-                                {processing
-                                    ? "Menyimpan..."
-                                    : "Simpan Perubahan"}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    {/* Tombol Aksi */}
+                    <div className="flex justify-start space-x-2 pt-6">
+                        <Link href="/permissions">
+                            <Button variant="outline">Batal</Button>
+                        </Link>
+                        <Button type="submit" disabled={processing}>
+                            <Save />
+                            {processing ? "Menyimpan..." : "Simpan Perubahan"}
+                        </Button>
+                    </div>
+                </form>
             </LayoutApp>
         </>
     );
