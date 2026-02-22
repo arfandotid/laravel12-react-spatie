@@ -16,7 +16,13 @@ import {
     CardHeader,
     CardTitle,
 } from "@/Components/ui/card";
-import { Field, FieldGroup, FieldLabel, FieldSet } from "@/Components/ui/field";
+import {
+    Field,
+    FieldDescription,
+    FieldGroup,
+    FieldLabel,
+    FieldSet,
+} from "@/Components/ui/field";
 import { Input } from "@/Components/ui/input";
 import { Button } from "@/Components/ui/button";
 import PageHeader from "@/Shared/PageHeader";
@@ -104,15 +110,14 @@ export default function SettingsIndex() {
                                 </label>
                             </div>
                             {setting.app_logo && (
-                                <button
+                                <Button
                                     type="button"
                                     onClick={deleteLogo}
-                                    className="inline-flex items-center px-2 py-1 mt-3 text-sm font-semibold
-                                    text-white bg-red-600 rounded-lg hover:bg-red-700 disabled:opacity-50"
+                                    variant="destructive"
                                 >
-                                    <Trash2 className="w-4 h-4 mr-2" />
+                                    <Trash2 />
                                     Hapus Logo
-                                </button>
+                                </Button>
                             )}
                             {errors.app_logo && (
                                 <p className="mt-1 text-sm text-red-600">
@@ -132,9 +137,9 @@ export default function SettingsIndex() {
                                 className={`${errors.app_name ? "border-red-500" : "border-gray-300"}`}
                             />
                             {errors.app_name && (
-                                <p className="mt-1 text-sm text-red-600">
+                                <FieldDescription className="mt-1 text-sm text-red-600">
                                     {errors.app_name}
-                                </p>
+                                </FieldDescription>
                             )}
                         </Field>
 
