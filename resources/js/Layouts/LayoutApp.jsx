@@ -1,5 +1,7 @@
 import { AppSidebar } from "@/Components/Sidebar/AppSidebar";
 import NavBreadcrumb from "@/Components/Sidebar/NavBreadcrumb";
+import { ThemeProvider } from "@/Components/ThemeProvider";
+import { ThemeToggle } from "@/Components/ThemeToggle";
 import { Separator } from "@/components/ui/separator";
 import {
     SidebarInset,
@@ -29,23 +31,31 @@ export default function LayoutApp({ children }) {
     }, [flash]);
 
     return (
-        <SidebarProvider>
-            <AppSidebar auth={auth} />
-            <SidebarInset>
-                <header className="flex h-16 shrink-0 items-center gap-2">
-                    <div className="flex items-center gap-2 px-4">
-                        <SidebarTrigger className="-ml-1" />
-                        <Separator
-                            orientation="vertical"
-                            className="mr-2 data-[orientation=vertical]:h-4"
-                        />
-                        <NavBreadcrumb />
+        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <SidebarProvider>
+                <AppSidebar auth={auth} />
+                <SidebarInset>
+                    <header className="flex h-16 shrink-0 items-center justify-between px-4">
+                        {/* LEFT SIDE */}
+                        <div className="flex items-center gap-2">
+                            <SidebarTrigger className="-ml-1" />
+                            <Separator
+                                orientation="vertical"
+                                className="mr-2 data-[orientation=vertical]:h-4"
+                            />
+                            <NavBreadcrumb />
+                        </div>
+
+                        {/* RIGHT SIDE */}
+                        <div>
+                            <ThemeToggle />
+                        </div>
+                    </header>
+                    <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                        {children}
                     </div>
-                </header>
-                <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-                    {children}
-                </div>
-            </SidebarInset>
-        </SidebarProvider>
+                </SidebarInset>
+            </SidebarProvider>
+        </ThemeProvider>
     );
 }
