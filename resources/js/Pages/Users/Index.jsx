@@ -24,6 +24,7 @@ import Delete from "@/Shared/Delete";
 
 // import table pagination
 import TablePagination from "@/Shared/TablePagination";
+import { Button } from "@/Components/ui/button";
 
 export default function UsersIndex() {
     // destruct props "users"
@@ -34,19 +35,17 @@ export default function UsersIndex() {
             <Head title={`Users`} />
             <LayoutApp>
                 {/* Header */}
-                <div className="mb-8">
-                    <PageHeader
-                        showButton
-                        title="Users"
-                        description="Kelola data pengguna dan role akses"
-                        action="/users/create"
-                        actionText="Tambah User"
-                        permission="users.create"
-                    />
-                </div>
+                <PageHeader
+                    showButton
+                    title="Users"
+                    description="Kelola data pengguna dan role akses"
+                    action="/users/create"
+                    actionText="Tambah User"
+                    permission="users.create"
+                />
 
                 {/* Card */}
-                <div className="p-6 bg-white rounded-xl shadow-sm">
+                <div className="space-y-5">
                     <Search URL={"/users"} />
 
                     {/* Table */}
@@ -54,19 +53,19 @@ export default function UsersIndex() {
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
                                         No.
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
                                         Nama
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
                                         Email
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
                                         Role
                                     </th>
-                                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase w-7">
+                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase w-7">
                                         Aksi
                                     </th>
                                 </tr>
@@ -78,18 +77,18 @@ export default function UsersIndex() {
                                             key={user.id}
                                             className="hover:bg-gray-50"
                                         >
-                                            <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                                            <td className="px-6 py-2 text-sm font-medium text-gray-900">
                                                 {++index +
                                                     (users.current_page - 1) *
                                                         users.per_page}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-gray-900">
+                                            <td className="px-6 py-2 text-sm text-gray-900">
                                                 {user.name}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                            <td className="px-6 py-2 text-sm text-gray-700">
                                                 {user.email}
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-gray-700">
+                                            <td className="px-6 py-2 text-sm text-gray-700">
                                                 {user.roles.length > 0
                                                     ? user.roles
                                                           .map(
@@ -99,17 +98,21 @@ export default function UsersIndex() {
                                                           .join(", ")
                                                     : "-"}
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-6 py-2">
                                                 <div className="flex items-center space-x-2">
                                                     {hasAnyPermission([
                                                         "users.edit",
                                                     ]) && (
                                                         <Link
                                                             href={`/users/${user.id}/edit`}
-                                                            className="inline-flex items-center p-2 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg"
                                                             title="Edit"
                                                         >
-                                                            <Edit className="w-4 h-4" />
+                                                            <Button
+                                                                variant="outline"
+                                                                size="icon"
+                                                            >
+                                                                <Edit />
+                                                            </Button>
                                                         </Link>
                                                     )}
                                                     {hasAnyPermission([

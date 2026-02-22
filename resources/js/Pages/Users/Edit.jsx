@@ -9,6 +9,10 @@ import { Save } from "lucide-react";
 
 // import component PageHeader
 import PageHeader from "@/Shared/PageHeader";
+import { Input } from "@/Components/ui/input";
+import { Field, FieldDescription, FieldLabel } from "@/Components/ui/field";
+import { Checkbox } from "@/Components/ui/checkbox";
+import { Button } from "@/Components/ui/button";
 
 export default function UsersEdit() {
     // props dari controller
@@ -45,137 +49,116 @@ export default function UsersEdit() {
             <Head title={`Edit User - ${import.meta.env.VITE_APP_NAME}`} />
             <LayoutApp>
                 {/* Header */}
-                <div className="mb-8">
-                    <PageHeader
-                        title="Edit User"
-                        description="Perbarui data pengguna dan role akses"
-                    />
-                </div>
+                <PageHeader
+                    title="Edit User"
+                    description="Perbarui data pengguna dan role akses"
+                />
 
                 {/* Card */}
-                <div className="p-6 bg-white rounded-xl shadow-sm">
-                    <form onSubmit={handleSubmit}>
-                        <div className="space-y-6">
-                            {/* Name */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Nama
-                                </label>
-                                <input
-                                    type="text"
-                                    value={data.name}
-                                    onChange={(e) =>
-                                        setData("name", e.target.value)
-                                    }
-                                    className={`w-full px-4 py-2 border rounded-lg ${errors.name ? "border-red-500" : "border-gray-300"}`}
-                                />
-                                {errors.name && (
-                                    <p className="mt-1 text-sm text-red-600">
-                                        {errors.name}
-                                    </p>
-                                )}
+                <form onSubmit={handleSubmit}>
+                    <div className="space-y-5">
+                        {/* Name */}
+                        <Field>
+                            <FieldLabel>Nama</FieldLabel>
+                            <Input
+                                type="text"
+                                value={data.name}
+                                onChange={(e) =>
+                                    setData("name", e.target.value)
+                                }
+                                className={`${errors.name ? "border-red-500" : "border-gray-300"}`}
+                                placeholder="Nama lengkap"
+                            />
+                            {errors.name && (
+                                <FieldDescription className="mt-1 text-sm text-red-600">
+                                    {errors.name}
+                                </FieldDescription>
+                            )}
+                        </Field>
+
+                        {/* Email */}
+                        <Field>
+                            <FieldLabel>Email</FieldLabel>
+                            <Input
+                                type="email"
+                                value={data.email}
+                                onChange={(e) =>
+                                    setData("email", e.target.value)
+                                }
+                                className={`${errors.email ? "border-red-500" : "border-gray-300"}`}
+                                placeholder="email@example.com"
+                            />
+                            {errors.email && (
+                                <FieldDescription className="mt-1 text-sm text-red-600">
+                                    {errors.email}
+                                </FieldDescription>
+                            )}
+                        </Field>
+
+                        {/* Password (Optional) */}
+                        <Field>
+                            <FieldLabel>Password (opsional)</FieldLabel>
+                            <Input
+                                type="password"
+                                value={data.password}
+                                onChange={(e) =>
+                                    setData("password", e.target.value)
+                                }
+                                className={`${errors.password ? "border-red-500" : "border-gray-300"}`}
+                                placeholder="Kosongkan jika tidak ingin mengubah"
+                            />
+                            {errors.password && (
+                                <FieldDescription className="mt-1 text-sm text-red-600">
+                                    {errors.password}
+                                </FieldDescription>
+                            )}
+                        </Field>
+
+                        {/* Roles */}
+                        <Field>
+                            <FieldLabel>Roles</FieldLabel>
+
+                            <div className="grid grid-cols-1 gap-4">
+                                {roles.map((role) => (
+                                    <Field
+                                        orientation="horizontal"
+                                        key={role.id}
+                                    >
+                                        <Checkbox
+                                            id={`role-${role.id}`}
+                                            checked={data.roles.includes(
+                                                role.id,
+                                            )}
+                                            onCheckedChange={(checked) => {
+                                                toggleRole(role.id, checked);
+                                            }}
+                                        />
+                                        <FieldLabel htmlFor={`role-${role.id}`}>
+                                            {role.name}
+                                        </FieldLabel>
+                                    </Field>
+                                ))}
                             </div>
 
-                            {/* Email */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    value={data.email}
-                                    onChange={(e) =>
-                                        setData("email", e.target.value)
-                                    }
-                                    className={`w-full px-4 py-2 border rounded-lg ${errors.email ? "border-red-500" : "border-gray-300"}`}
-                                />
-                                {errors.email && (
-                                    <p className="mt-1 text-sm text-red-600">
-                                        {errors.email}
-                                    </p>
-                                )}
-                            </div>
+                            {errors.roles && (
+                                <FieldDescription className="mt-1 text-sm text-red-600">
+                                    {errors.roles}
+                                </FieldDescription>
+                            )}
+                        </Field>
+                    </div>
 
-                            {/* Password (Optional) */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Password{" "}
-                                    <span className="text-gray-400">
-                                        (Opsional)
-                                    </span>
-                                </label>
-                                <input
-                                    type="password"
-                                    value={data.password}
-                                    onChange={(e) =>
-                                        setData("password", e.target.value)
-                                    }
-                                    className={`w-full px-4 py-2 border rounded-lg ${errors.password ? "border-red-500" : "border-gray-300"}`}
-                                    placeholder="Kosongkan jika tidak ingin mengubah"
-                                />
-                                {errors.password && (
-                                    <p className="mt-1 text-sm text-red-600">
-                                        {errors.password}
-                                    </p>
-                                )}
-                            </div>
-
-                            {/* Roles */}
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-3">
-                                    Roles
-                                </label>
-
-                                <div className="grid grid-cols-1 gap-4">
-                                    {roles.map((role) => (
-                                        <label
-                                            key={role.id}
-                                            className="flex items-center space-x-2 text-sm text-gray-700"
-                                        >
-                                            <input
-                                                type="checkbox"
-                                                checked={data.roles.includes(
-                                                    role.id,
-                                                )}
-                                                onChange={() =>
-                                                    toggleRole(role.id)
-                                                }
-                                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                                            />
-                                            <span>{role.name}</span>
-                                        </label>
-                                    ))}
-                                </div>
-
-                                {errors.roles && (
-                                    <p className="mt-2 text-sm text-red-600">
-                                        {errors.roles}
-                                    </p>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Tombol Aksi */}
-                        <div className="flex justify-start space-x-3 pt-6">
-                            <Link
-                                href="/users"
-                                className="px-6 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50"
-                            >
-                                Batal
-                            </Link>
-                            <button
-                                type="submit"
-                                disabled={processing}
-                                className="inline-flex items-center px-6 py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-50"
-                            >
-                                <Save className="w-4 h-4 mr-2" />
-                                {processing
-                                    ? "Menyimpan..."
-                                    : "Simpan Perubahan"}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+                    {/* Tombol Aksi */}
+                    <div className="flex justify-start space-x-2 pt-6">
+                        <Link href="/users">
+                            <Button variant="outline">Batal</Button>
+                        </Link>
+                        <Button type="submit" disabled={processing}>
+                            <Save />
+                            {processing ? "Menyimpan..." : "Simpan Perubahan"}
+                        </Button>
+                    </div>
+                </form>
             </LayoutApp>
         </>
     );
