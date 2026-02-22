@@ -25,6 +25,12 @@ import Delete from "@/Shared/Delete";
 // import table pagination
 import TablePagination from "@/Shared/TablePagination";
 import { Button } from "@/Components/ui/button";
+import Table from "@/Components/BasicTable/Table";
+import TableBody from "@/Components/BasicTable/TableBody";
+import TableHeader from "@/Components/BasicTable/TableHeader";
+import TableRow from "@/Components/BasicTable/TableRow";
+import TableHead from "@/Components/BasicTable/TableHead";
+import TableCell from "@/Components/BasicTable/TableCell";
 
 export default function UsersIndex() {
     // destruct props "users"
@@ -49,94 +55,72 @@ export default function UsersIndex() {
                     <Search URL={"/users"} />
 
                     {/* Table */}
-                    <div className="overflow-x-auto border border-gray-200 rounded-lg mt-5">
-                        <table className="min-w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50">
-                                <tr>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
-                                        No.
-                                    </th>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
-                                        Nama
-                                    </th>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
-                                        Email
-                                    </th>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
-                                        Role
-                                    </th>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase w-7">
-                                        Aksi
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {users && users.data.length > 0 ? (
-                                    users.data.map((user, index) => (
-                                        <tr
-                                            key={user.id}
-                                            className="hover:bg-gray-50"
-                                        >
-                                            <td className="px-6 py-2 text-sm font-medium text-gray-900">
-                                                {++index +
-                                                    (users.current_page - 1) *
-                                                        users.per_page}
-                                            </td>
-                                            <td className="px-6 py-2 text-sm text-gray-900">
-                                                {user.name}
-                                            </td>
-                                            <td className="px-6 py-2 text-sm text-gray-700">
-                                                {user.email}
-                                            </td>
-                                            <td className="px-6 py-2 text-sm text-gray-700">
-                                                {user.roles.length > 0
-                                                    ? user.roles
-                                                          .map(
-                                                              (role) =>
-                                                                  role.name,
-                                                          )
-                                                          .join(", ")
-                                                    : "-"}
-                                            </td>
-                                            <td className="px-6 py-2">
-                                                <div className="flex items-center space-x-2">
-                                                    {hasAnyPermission([
-                                                        "users.edit",
-                                                    ]) && (
-                                                        <Link
-                                                            href={`/users/${user.id}/edit`}
-                                                            title="Edit"
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>No.</TableHead>
+                                <TableHead>Nama</TableHead>
+                                <TableHead>Email</TableHead>
+                                <TableHead>Role</TableHead>
+                                <TableHead className="w-7">Aksi</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {users && users.data.length > 0 ? (
+                                users.data.map((user, index) => (
+                                    <TableRow key={user.id}>
+                                        <TableCell className="font-medium">
+                                            {++index +
+                                                (users.current_page - 1) *
+                                                    users.per_page}
+                                        </TableCell>
+                                        <TableCell>{user.name}</TableCell>
+                                        <TableCell>{user.email}</TableCell>
+                                        <TableCell>
+                                            {user.roles.length > 0
+                                                ? user.roles
+                                                      .map((role) => role.name)
+                                                      .join(", ")
+                                                : "-"}
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className="flex items-center space-x-2">
+                                                {hasAnyPermission([
+                                                    "users.edit",
+                                                ]) && (
+                                                    <Link
+                                                        href={`/users/${user.id}/edit`}
+                                                        title="Edit"
+                                                    >
+                                                        <Button
+                                                            variant="outline"
+                                                            size="icon"
                                                         >
-                                                            <Button
-                                                                variant="outline"
-                                                                size="icon"
-                                                            >
-                                                                <Edit />
-                                                            </Button>
-                                                        </Link>
-                                                    )}
-                                                    {hasAnyPermission([
-                                                        "users.delete",
-                                                    ]) && (
-                                                        <Delete
-                                                            URL={"/users"}
-                                                            id={user.id}
-                                                        />
-                                                    )}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <TableEmpty
-                                        title="Tidak ada User"
-                                        description="Silahkan tambahkan user baru"
-                                        colSpan={5}
-                                    />
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
+                                                            <Edit />
+                                                        </Button>
+                                                    </Link>
+                                                )}
+                                                {hasAnyPermission([
+                                                    "users.delete",
+                                                ]) && (
+                                                    <Delete
+                                                        URL={"/users"}
+                                                        id={user.id}
+                                                    />
+                                                )}
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableEmpty
+                                    title="Tidak ada User"
+                                    description="Silahkan tambahkan user baru"
+                                    colSpan={5}
+                                />
+                            )}
+                        </TableBody>
+                    </Table>
 
                     {/* Pagination */}
                     <TablePagination links={users.links} />

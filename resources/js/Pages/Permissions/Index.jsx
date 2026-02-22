@@ -25,6 +25,12 @@ import Delete from "@/Shared/Delete";
 // Import table pagination
 import TablePagination from "@/Shared/TablePagination";
 import { Button } from "@/Components/ui/button";
+import Table from "@/Components/BasicTable/Table";
+import TableHeader from "@/Components/BasicTable/TableHeader";
+import TableBody from "@/Components/BasicTable/TableBody";
+import TableRow from "@/Components/BasicTable/TableRow";
+import TableHead from "@/Components/BasicTable/TableHead";
+import TableCell from "@/Components/BasicTable/TableCell";
 
 export default function PermissionsIndex() {
     // destruct props "permissions" dari usePage
@@ -49,82 +55,62 @@ export default function PermissionsIndex() {
                     <Search URL={"/permissions"} />
 
                     {/* Table */}
-                    <div className="overflow-x-auto border border-gray-200 rounded-lg mt-5">
-                        <table className="min-w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50">
-                                <tr>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
-                                        No.
-                                    </th>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
-                                        Nama Permission
-                                    </th>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase w-7">
-                                        Aksi
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {permissions && permissions.data.length > 0 ? (
-                                    permissions.data.map(
-                                        (permission, index) => (
-                                            <tr
-                                                key={permission.id}
-                                                className="hover:bg-gray-50"
-                                            >
-                                                <td className="px-6 py-2 text-sm font-medium text-gray-900">
-                                                    {++index +
-                                                        (permissions.current_page -
-                                                            1) *
-                                                            permissions.per_page}
-                                                </td>
-                                                <td className="px-6 py-2 text-sm text-gray-900">
-                                                    {permission.name}
-                                                </td>
-                                                <td className="px-6 py-2">
-                                                    <div className="flex items-center space-x-2">
-                                                        {hasAnyPermission([
-                                                            "permissions.edit",
-                                                        ]) && (
-                                                            <Link
-                                                                href={`/permissions/${permission.id}/edit`}
-                                                                title="Edit"
-                                                            >
-                                                                <Button
-                                                                    size="icon"
-                                                                    variant="outline"
-                                                                >
-                                                                    <Edit />
-                                                                </Button>
-                                                            </Link>
-                                                        )}
-                                                        {hasAnyPermission([
-                                                            "permissions.delete",
-                                                        ]) && (
-                                                            <Delete
-                                                                URL={
-                                                                    "/permissions"
-                                                                }
-                                                                id={
-                                                                    permission.id
-                                                                }
-                                                            />
-                                                        )}
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ),
-                                    )
-                                ) : (
-                                    <TableEmpty
-                                        title="Tidak ada Permission"
-                                        description="Silahkan tambahkan permission baru"
-                                        colSpan={3}
-                                    />
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>No.</TableHead>
+                                <TableHead>Nama Permission</TableHead>
+                                <TableHead className="w-7">Aksi</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {permissions && permissions.data.length > 0 ? (
+                                permissions.data.map((permission, index) => (
+                                    <TableRow key={permission.id}>
+                                        <TableCell className="font-medium">
+                                            {++index +
+                                                (permissions.current_page - 1) *
+                                                    permissions.per_page}
+                                        </TableCell>
+                                        <TableCell>{permission.name}</TableCell>
+                                        <TableCell>
+                                            <div className="flex items-center space-x-2">
+                                                {hasAnyPermission([
+                                                    "permissions.edit",
+                                                ]) && (
+                                                    <Link
+                                                        href={`/permissions/${permission.id}/edit`}
+                                                        title="Edit"
+                                                    >
+                                                        <Button
+                                                            size="icon"
+                                                            variant="outline"
+                                                        >
+                                                            <Edit />
+                                                        </Button>
+                                                    </Link>
+                                                )}
+                                                {hasAnyPermission([
+                                                    "permissions.delete",
+                                                ]) && (
+                                                    <Delete
+                                                        URL={"/permissions"}
+                                                        id={permission.id}
+                                                    />
+                                                )}
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableEmpty
+                                    title="Tidak ada Permission"
+                                    description="Silahkan tambahkan permission baru"
+                                    colSpan={3}
+                                />
+                            )}
+                        </TableBody>
+                    </Table>
 
                     {/* Pagination */}
                     <TablePagination links={permissions.links} />

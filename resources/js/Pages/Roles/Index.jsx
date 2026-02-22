@@ -25,6 +25,12 @@ import Delete from "@/Shared/Delete";
 // import component Pagination
 import TablePagination from "@/Shared/TablePagination";
 import { Button } from "@/Components/ui/button";
+import Table from "@/Components/BasicTable/Table";
+import TableHeader from "@/Components/BasicTable/TableHeader";
+import TableRow from "@/Components/BasicTable/TableRow";
+import TableHead from "@/Components/BasicTable/TableHead";
+import TableBody from "@/Components/BasicTable/TableBody";
+import TableCell from "@/Components/BasicTable/TableCell";
 
 export default function RolesIndex() {
     // destruct props "roles"
@@ -48,81 +54,66 @@ export default function RolesIndex() {
                     <Search URL={"/roles"} />
 
                     {/* Table */}
-                    <div className="overflow-x-auto border border-gray-200 rounded-lg">
-                        <table className="min-w-full divide-y divide-gray-200">
-                            <thead className="bg-gray-50">
-                                <tr>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
-                                        No.
-                                    </th>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
-                                        Nama Role
-                                    </th>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase">
-                                        Jumlah Permission
-                                    </th>
-                                    <th className="px-6 py-2 text-left text-xs font-semibold text-gray-700 uppercase w-7">
-                                        Aksi
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody className="bg-white divide-y divide-gray-200">
-                                {roles && roles.data.length > 0 ? (
-                                    roles.data.map((role, index) => (
-                                        <tr
-                                            key={role.id}
-                                            className="hover:bg-gray-50"
-                                        >
-                                            <td className="px-6 py-2 text-sm font-medium text-gray-900">
-                                                {++index +
-                                                    (roles.current_page - 1) *
-                                                        roles.per_page}
-                                            </td>
-                                            <td className="px-6 py-2 text-sm text-gray-900">
-                                                {role.name}
-                                            </td>
-                                            <td className="px-6 py-2 text-sm text-gray-700">
-                                                {role.permissions_count}
-                                            </td>
-                                            <td className="px-6 py-2">
-                                                <div className="flex items-center space-x-2">
-                                                    {hasAnyPermission([
-                                                        "roles.edit",
-                                                    ]) && (
-                                                        <Link
-                                                            href={`/roles/${role.id}/edit`}
-                                                            title="Edit"
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>No.</TableHead>
+                                <TableHead>Nama Role</TableHead>
+                                <TableHead>Jumlah Permission</TableHead>
+                                <TableHead className="w-7">Aksi</TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {roles && roles.data.length > 0 ? (
+                                roles.data.map((role, index) => (
+                                    <TableRow key={role.id}>
+                                        <TableCell className="font-medium">
+                                            {++index +
+                                                (roles.current_page - 1) *
+                                                    roles.per_page}
+                                        </TableCell>
+                                        <TableCell>{role.name}</TableCell>
+                                        <TableCell>
+                                            {role.permissions_count}
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className="flex items-center space-x-2">
+                                                {hasAnyPermission([
+                                                    "roles.edit",
+                                                ]) && (
+                                                    <Link
+                                                        href={`/roles/${role.id}/edit`}
+                                                        title="Edit"
+                                                    >
+                                                        <Button
+                                                            size="icon"
+                                                            variant="outline"
                                                         >
-                                                            <Button
-                                                                size="icon"
-                                                                variant="outline"
-                                                            >
-                                                                <Edit />
-                                                            </Button>
-                                                        </Link>
-                                                    )}
-                                                    {hasAnyPermission([
-                                                        "roles.delete",
-                                                    ]) && (
-                                                        <Delete
-                                                            URL={"/roles"}
-                                                            id={role.id}
-                                                        />
-                                                    )}
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))
-                                ) : (
-                                    <TableEmpty
-                                        title="Tidak ada Role"
-                                        description="Silahkan tambahkan role baru"
-                                        colSpan={4}
-                                    />
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
+                                                            <Edit />
+                                                        </Button>
+                                                    </Link>
+                                                )}
+                                                {hasAnyPermission([
+                                                    "roles.delete",
+                                                ]) && (
+                                                    <Delete
+                                                        URL={"/roles"}
+                                                        id={role.id}
+                                                    />
+                                                )}
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableEmpty
+                                    title="Tidak ada Role"
+                                    description="Silahkan tambahkan role baru"
+                                    colSpan={4}
+                                />
+                            )}
+                        </TableBody>
+                    </Table>
 
                     {/* Pagination */}
                     <TablePagination links={roles.links} />
