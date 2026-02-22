@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
-    ->name('home')
-    ->middleware('guest');
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 
 // route login
 Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'index'])
