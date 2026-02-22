@@ -1,4 +1,5 @@
 // import inertia router
+import { Button } from "@/Components/ui/button";
 import { router } from "@inertiajs/react";
 
 // import icons
@@ -29,13 +30,14 @@ export default function Delete({ URL, id }) {
 
     return (
         <>
-            <button
+            <Button
+                size="icon"
+                variant="destructive"
                 onClick={() => destroy(id)}
-                className="inline-flex items-center p-2 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg"
                 title="Hapus"
             >
-                <Trash2 className="w-4 h-4" />
-            </button>
+                <Trash2 />
+            </Button>
         </>
     );
 }

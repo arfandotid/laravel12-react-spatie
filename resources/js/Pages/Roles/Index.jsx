@@ -24,6 +24,7 @@ import Delete from "@/Shared/Delete";
 
 // import component Pagination
 import TablePagination from "@/Shared/TablePagination";
+import { Button } from "@/Components/ui/button";
 
 export default function RolesIndex() {
     // destruct props "roles"
@@ -90,10 +91,14 @@ export default function RolesIndex() {
                                                     ]) && (
                                                         <Link
                                                             href={`/roles/${role.id}/edit`}
-                                                            className="inline-flex items-center p-2 bg-blue-50 text-blue-600 hover:bg-blue-100 rounded-lg"
                                                             title="Edit"
                                                         >
-                                                            <Edit className="w-4 h-4" />
+                                                            <Button
+                                                                size="icon"
+                                                                variant="outline"
+                                                            >
+                                                                <Edit className="w-4 h-4" />
+                                                            </Button>
                                                         </Link>
                                                     )}
                                                     {hasAnyPermission([
