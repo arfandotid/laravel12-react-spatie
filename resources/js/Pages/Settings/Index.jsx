@@ -78,70 +78,73 @@ export default function SettingsIndex() {
 
                 <form onSubmit={handleSubmit}>
                     <FieldSet>
-                        <Field>
-                            <FieldLabel>Logo Aplikasi</FieldLabel>
-                            <div
-                                className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors
-                                    ${errors.app_logo ? "border-red-500 bg-red-50" : "border-gray-300 hover:border-blue-500"}`}
-                            >
-                                <input
-                                    type="file"
-                                    id="logo_file"
-                                    onChange={(e) =>
-                                        setData("app_logo", e.target.files[0])
-                                    }
-                                    className="hidden"
-                                    accept="image/png, image/jpeg, image/jpg"
-                                />
-
-                                <label
-                                    htmlFor="logo_file"
-                                    className="cursor-pointer flex flex-col items-center"
-                                >
-                                    <Upload className="w-12 h-12 text-gray-400 mb-2" />
-                                    <p className="text-sm text-gray-600">
-                                        {data.app_logo
-                                            ? data.app_logo.name
-                                            : "Klik untuk upload logo aplikasi"}
-                                    </p>
-                                    <p className="text-xs text-gray-500 mt-1">
-                                        PNG / JPG, maksimal 2MB
-                                    </p>
-                                </label>
-                            </div>
-                            {setting.app_logo && (
-                                <Button
-                                    type="button"
-                                    onClick={deleteLogo}
-                                    variant="destructive"
-                                >
-                                    <Trash2 />
-                                    Hapus Logo
-                                </Button>
-                            )}
-                            {errors.app_logo && (
-                                <p className="mt-1 text-sm text-red-600">
-                                    {errors.app_logo}
-                                </p>
-                            )}
-                        </Field>
-
-                        <Field>
-                            <FieldLabel>Nama Aplikasi</FieldLabel>
-                            <Input
-                                type="text"
-                                value={data.app_name}
-                                onChange={(e) =>
-                                    setData("app_name", e.target.value)
-                                }
-                                className={`${errors.app_name ? "border-red-500" : "border-gray-300"}`}
-                            />
-                            {errors.app_name && (
-                                <FieldDescription className="mt-1 text-sm text-red-600">
-                                    {errors.app_name}
+                        <div className="grid sm:grid-cols-2 gap-4">
+                            <Field>
+                                <FieldLabel>Logo Aplikasi</FieldLabel>
+                                <div className="flex gap-2 items-center">
+                                    <Input
+                                        type="file"
+                                        id="logo_file"
+                                        onChange={(e) =>
+                                            setData(
+                                                "app_logo",
+                                                e.target.files[0],
+                                            )
+                                        }
+                                        accept="image/png, image/jpeg, image/jpg"
+                                    />
+                                    {setting?.app_logo && (
+                                        <>
+                                            <a
+                                                href={setting?.app_logo}
+                                                target="_blank"
+                                                className="cursor-zoom-in"
+                                            >
+                                                <img
+                                                    src={
+                                                        setting?.app_logo || ""
+                                                    }
+                                                    alt="Logo Aplikasi"
+                                                    className="w-10 h-10 object-contain border rounded-md"
+                                                />
+                                            </a>
+                                            <Button
+                                                type="button"
+                                                onClick={deleteLogo}
+                                                variant="destructive"
+                                                size="icon"
+                                            >
+                                                <Trash2 />
+                                            </Button>
+                                        </>
+                                    )}
+                                </div>
+                                <FieldDescription className="text-xs text-gray-500 mt-1">
+                                    PNG / JPG, maksimal 2MB
                                 </FieldDescription>
-                            )}
-                        </Field>
+                                {errors.app_logo && (
+                                    <FieldDescription className="mt-1 text-sm text-red-600">
+                                        {errors.app_logo}
+                                    </FieldDescription>
+                                )}
+                            </Field>
+                            <Field>
+                                <FieldLabel>Nama Aplikasi</FieldLabel>
+                                <Input
+                                    type="text"
+                                    value={data.app_name}
+                                    onChange={(e) =>
+                                        setData("app_name", e.target.value)
+                                    }
+                                    className={`${errors.app_name ? "border-red-500" : "border-gray-300"}`}
+                                />
+                                {errors.app_name && (
+                                    <FieldDescription className="mt-1 text-sm text-red-600">
+                                        {errors.app_name}
+                                    </FieldDescription>
+                                )}
+                            </Field>
+                        </div>
 
                         {/* Action */}
                         <div>

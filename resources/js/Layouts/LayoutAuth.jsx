@@ -1,8 +1,12 @@
 import { ThemeProvider } from "@/Components/ThemeProvider";
 import { ThemeToggle } from "@/Components/ThemeToggle";
+import { usePage } from "@inertiajs/react";
 import { GalleryVerticalEnd } from "lucide-react";
 
 export default function LayoutAuth({ children }) {
+    // destructure "settings" dari props page
+    const { settings } = usePage().props;
+
     return (
         <>
             <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -14,13 +18,22 @@ export default function LayoutAuth({ children }) {
 
                     <div className="flex w-full max-w-sm flex-col gap-6">
                         <a
-                            href="#"
+                            href="/"
                             className="flex items-center gap-2 self-center font-medium"
                         >
-                            <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
-                                <GalleryVerticalEnd className="size-4" />
-                            </div>
-                            {import.meta.env.VITE_APP_NAME}
+                            {settings?.app_logo ? (
+                                <img
+                                    src={settings.app_logo}
+                                    alt="App Logo"
+                                    className="flex size-6 items-center justify-center rounded-md"
+                                />
+                            ) : (
+                                <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
+                                    <GalleryVerticalEnd className="size-4" />
+                                </div>
+                            )}
+                            {settings?.app_name ||
+                                import.meta.env.VITE_APP_NAME}
                         </a>
 
                         {children}

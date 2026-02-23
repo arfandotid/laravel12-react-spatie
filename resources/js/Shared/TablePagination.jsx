@@ -7,7 +7,6 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/Components/ui/pagination";
-import { Link } from "@inertiajs/react";
 
 export default function TablePagination({ links }) {
     return (
