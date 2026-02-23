@@ -76,6 +76,9 @@ class SettingController extends Controller implements HasMiddleware
 
             // simpan logo baru
             $data['app_logo'] = $this->uploadFile($request, 'app_logo', 'uploads/settings/logo');
+        } else {
+            // jika tidak ada file baru, tetap gunakan logo lama
+            $data['app_logo'] = $setting->app_logo;
         }
 
         // update setting
