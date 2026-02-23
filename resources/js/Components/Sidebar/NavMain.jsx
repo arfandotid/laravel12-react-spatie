@@ -17,7 +17,7 @@ import {
     SidebarMenuSubButton,
     SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 
 // import menuConfig
 import {
@@ -28,6 +28,7 @@ import {
 
 export function NavMain() {
     const filteredMenuItems = getFilteredMenuItems();
+    const { url } = usePage();
 
     return (
         <SidebarGroup>
@@ -42,10 +43,17 @@ export function NavMain() {
                         return null;
                     }
 
+                    const isDropdownActive =
+                        item.dropdown &&
+                        item.dropdown.some((subItem) =>
+                            url.startsWith(subItem.href),
+                        );
+
                     return (
                         <Collapsible
                             key={item.name}
                             asChild
+                            defaultOpen={isDropdownActive}
                             className="group/collapsible"
                         >
                             <SidebarMenuItem>
@@ -54,6 +62,7 @@ export function NavMain() {
                                         <CollapsibleTrigger asChild>
                                             <SidebarMenuButton
                                                 tooltip={item.name}
+                                                isActive={isDropdownActive}
                                             >
                                                 {item.icon && <item.icon />}
                                                 <span>{item.name}</span>
@@ -69,6 +78,9 @@ export function NavMain() {
                                                         >
                                                             <SidebarMenuSubButton
                                                                 asChild
+                                                                isActive={url.startsWith(
+                                                                    subItem.href,
+                                                                )}
                                                             >
                                                                 <Link
                                                                     href={
@@ -89,7 +101,10 @@ export function NavMain() {
                                         </CollapsibleContent>
                                     </>
                                 ) : (
-                                    <SidebarMenuButton asChild>
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive={url.startsWith(item.href)}
+                                    >
                                         <Link href={item.href}>
                                             <item.icon />
                                             <span>{item.name}</span>
