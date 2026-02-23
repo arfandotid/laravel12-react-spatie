@@ -136,7 +136,7 @@ export default function SettingsIndex() {
                                     onChange={(e) =>
                                         setData("app_name", e.target.value)
                                     }
-                                    className={`${errors.app_name ? "border-red-500" : "border-gray-300"}`}
+                                    className={`${errors.app_name ? "border-red-500" : ""}`}
                                 />
                                 {errors.app_name && (
                                     <FieldDescription className="mt-1 text-sm text-red-600">

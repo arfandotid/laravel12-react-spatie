@@ -54,7 +54,7 @@ export default function PermissionsEdit() {
                                 onChange={(e) =>
                                     setData("name", e.target.value)
                                 }
-                                className={`${errors.name ? "border-red-500" : "border-gray-300"}`}
+                                className={`${errors.name ? "border-red-500" : ""}`}
                                 placeholder="Contoh: permissions.edit"
                             />
                             {errors.name && (

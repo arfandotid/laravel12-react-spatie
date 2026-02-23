@@ -36,7 +36,7 @@ export default function SearchComponent({ URL }) {
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                                 placeholder="Cari data..."
-                                className="w-full pl-10 pr-4 py-2.5 text-sm bg-gray-50 border border-gray-300 rounded-lg focus:outline-none transition-all duration-200"
+                                className="w-full pl-10 pr-4 py-2.5 text-sm bg-gray-50 border rounded-lg focus:outline-none transition-all duration-200"
                             />
                         </div>
                     </div>

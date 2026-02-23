@@ -77,7 +77,7 @@ export default function RolesEdit() {
                                 onChange={(e) =>
                                     setData("name", e.target.value)
                                 }
-                                className={`${errors.name ? "border-red-500" : "border-gray-300"}`}
+                                className={`${errors.name ? "border-red-500" : ""}`}
                                 placeholder="Contoh: admin"
                             />
                             {errors.name && (
@@ -97,9 +97,9 @@ export default function RolesEdit() {
                                     (group) => (
                                         <div
                                             key={group}
-                                            className="border border-gray-200 rounded-xl p-4 bg-gray-50"
+                                            className="border border-gray-200 rounded-xl p-4 bg-gray-50 dark:bg-neutral-900 dark:border-neutral-800"
                                         >
-                                            <h4 className="text-sm font-semibold text-gray-800 mb-3">
+                                            <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-50 mb-3">
                                                 {group}
                                             </h4>
 

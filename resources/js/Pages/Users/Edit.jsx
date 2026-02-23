@@ -66,7 +66,7 @@ export default function UsersEdit() {
                                 onChange={(e) =>
                                     setData("name", e.target.value)
                                 }
-                                className={`${errors.name ? "border-red-500" : "border-gray-300"}`}
+                                className={`${errors.name ? "border-red-500" : ""}`}
                                 placeholder="Nama lengkap"
                             />
                             {errors.name && (
@@ -85,7 +85,7 @@ export default function UsersEdit() {
                                 onChange={(e) =>
                                     setData("email", e.target.value)
                                 }
-                                className={`${errors.email ? "border-red-500" : "border-gray-300"}`}
+                                className={`${errors.email ? "border-red-500" : ""}`}
                                 placeholder="email@example.com"
                             />
                             {errors.email && (
@@ -104,7 +104,7 @@ export default function UsersEdit() {
                                 onChange={(e) =>
                                     setData("password", e.target.value)
                                 }
-                                className={`${errors.password ? "border-red-500" : "border-gray-300"}`}
+                                className={`${errors.password ? "border-red-500" : ""}`}
                                 placeholder="Kosongkan jika tidak ingin mengubah"
                             />
                             {errors.password && (
