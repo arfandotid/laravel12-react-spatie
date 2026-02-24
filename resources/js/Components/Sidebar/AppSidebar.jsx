@@ -53,7 +53,11 @@ export function AppSidebar({ auth, ...props }) {
                                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                                     {settings?.app_logo ? (
                                         <img
-                                            src={settings.app_logo}
+                                            src={
+                                                import.meta.env.VITE_APP_URL +
+                                                "/" +
+                                                settings.app_logo
+                                            }
                                             alt="App Logo"
                                             className="h-full w-full object-contain rounded-lg"
                                         />

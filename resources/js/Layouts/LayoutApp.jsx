@@ -27,6 +27,15 @@ export default function LayoutApp({ children }) {
                 timer: 2000,
                 timerProgressBar: true,
             });
+        } else if (flash?.error) {
+            Swal.fire({
+                icon: "error",
+                title: "ERROR!",
+                text: flash.error,
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+            });
         }
     }, [flash]);
 

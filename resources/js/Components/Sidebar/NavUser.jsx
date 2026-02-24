@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronsUpDown, LogOut, Settings } from "lucide-react";
+import { ChevronsUpDown, Lock, LogOut, UserCog2 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -79,10 +79,16 @@ export function NavUser({ auth }) {
                             </div>
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <Link href="/settings">
+                        <Link href="/profile">
                             <DropdownMenuItem>
-                                <Settings />
-                                Settings
+                                <UserCog2 />
+                                Profile
+                            </DropdownMenuItem>
+                        </Link>
+                        <Link href="/profile/password">
+                            <DropdownMenuItem>
+                                <Lock />
+                                Change Password
                             </DropdownMenuItem>
                         </Link>
                         <Link
