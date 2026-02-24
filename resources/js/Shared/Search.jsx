@@ -1,8 +1,8 @@
 //import react
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //import inertia router
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 
 //import icons
 import { Search } from "lucide-react";
@@ -10,8 +10,21 @@ import { Input } from "@/Components/ui/input";
 import { Button } from "@/Components/ui/button";
 
 export default function SearchComponent({ URL }) {
-    //define state search
-    const [search, setSearch] = useState("");
+    const { url } = usePage();
+
+    // Get query parameter dari URL
+    const getQueryParam = (param) => {
+        const params = new URLSearchParams(window.location.search);
+        return params.get(param) || "";
+    };
+
+    //define state search - initialize dari query parameter
+    const [search, setSearch] = useState(getQueryParam("q"));
+
+    //sync state saat URL berubah
+    useEffect(() => {
+        setSearch(getQueryParam("q"));
+    }, [url]);
 
     //function "searchHandler"
     const handleSearch = (e) => {
