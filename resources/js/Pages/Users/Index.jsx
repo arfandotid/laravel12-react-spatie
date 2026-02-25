@@ -24,13 +24,19 @@ import Delete from "@/Shared/Delete";
 
 // import table pagination
 import TablePagination from "@/Shared/TablePagination";
+
+// import component Button
 import { Button } from "@/Components/ui/button";
-import Table from "@/Components/BasicTable/Table";
-import TableBody from "@/Components/BasicTable/TableBody";
-import TableHeader from "@/Components/BasicTable/TableHeader";
-import TableRow from "@/Components/BasicTable/TableRow";
-import TableHead from "@/Components/BasicTable/TableHead";
-import TableCell from "@/Components/BasicTable/TableCell";
+
+// import basic table components
+import {
+    Table,
+    TableHeader,
+    TableRow,
+    TableHead,
+    TableBody,
+    TableCell,
+} from "@/Components/BasicTable";
 
 export default function UsersIndex() {
     // destruct props "users"
